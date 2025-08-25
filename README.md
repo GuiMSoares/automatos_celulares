@@ -17,14 +17,13 @@ Implementação completa do autômato celular WireWorld com interface gráfica.
 
 ### Execução
 ```bash
-python automata.py                    # Grade vazia
-python automata.py arquivo.txt        # Carrega arquivo
+python automata.py                            # Mapa vazio
+python automata.py nome_do_arquivo.txt        # Carrega arquivo pré definido
 ```
 
 ### 🎯 Teste a demonstração
 1. **Pressione 'D'** ou clique **"Demo"** para criar padrão exemplo
 2. **Pressione Espaço** ou clique **"Play/Pause"** para iniciar
-3. Veja os elétrons se movendo pelos fios!
 
 ## ⌨️ Controles
 
@@ -54,17 +53,20 @@ python automata.py arquivo.txt        # Carrega arquivo
 
 ## 🔌 Estados das Células
 - **.** (cinza) - **Vazio**
-- **#** (amarelo) - **Condutor** (fio)
+- **#** (amarelo) - **Condutor**
 - **H** (azul) - **Cabeça de Elétron**
 - **t** (vermelho) - **Cauda de Elétron**
 
 ## 📁 Formato de Arquivo
 ```
 . # H t    <- Caracteres válidos
-0 1 2 3    <- Números também funcionam
+0 1 2 3    <- Ou números
 ```
 
-**Arquivos de exemplo:** `test1.txt`, `test2.txt`
+Exemplo de arquivo válido pode ser encontrado em 'teste.txt', assim como executado com:
+```
+python main.py test.tx
+```
 
 ## 📋 Requisitos
 ```bash
