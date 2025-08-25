@@ -65,7 +65,7 @@ python automata.py nome_do_arquivo.txt        # Carrega arquivo pré definido
 
 Exemplo de arquivo válido pode ser encontrado em 'teste.txt', assim como executado com:
 ```
-python main.py test.tx
+python main.py test.txt
 ```
 
 ## 📋 Requisitos
