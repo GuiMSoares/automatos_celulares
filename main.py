@@ -38,7 +38,7 @@ BG_COLOR = (20, 22, 28)
 GRID_BG = (30, 33, 40)
 COLORS = {
     EMPTY: (35, 38, 45),
-    CONDUCTOR: (244, 208, 63),   # âmbar
+    CONDUCTOR: (244, 208, 63),   
     ELECTRON_HEAD: (52, 152, 219),
     ELECTRON_TAIL: (231, 76, 60),
 }
