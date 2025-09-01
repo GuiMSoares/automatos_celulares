@@ -93,12 +93,12 @@ class WireWorldApp:
         add('Save', self.prompt_save, True)
         add('Speed -', lambda: self.set_speed(self.tps - 1), True)
         add('Speed +', lambda: self.set_speed(self.tps + 1), True)
-        add('examples:', None, False)
-        add('NOT', self.examples("..\gates\gate-not.txt"), False)
-        add('OR', self.examples("..\gates\gate-or.txt"), False)
-        add('AND', self.examples("..\gates\gate-and.txt"), False)
-        add('XOR', self.examples("..\gates\gate-xor.txt"), False)
-        add('Flip-Flop', self.examples("..\gates\gate-flip-flop.txt"), False)
+        #add('examples:', self.examples("..\gates\gate-and.txt"), False)
+        #add('NOT', self.examples("..\gates\gate-not.txt"), False)
+        #add('OR', self.examples("..\gates\gate-or.txt"), False)
+        #add('AND', self.examples("..\gates\gate-and.txt"), False)
+        #add('XOR', self.examples("..\gates\gate-xor.txt"), False)
+        #add('Flip-Flop', self.examples("..\gates\gate-flip-flop.txt"), False)
         
 
     # ------------- Actions -------------
@@ -148,7 +148,7 @@ class WireWorldApp:
             except Exception as e:
                 print(f"Error saving: {e}")
 
-    def examples(self, path: str):
+    def examples(self, path):
         """Load a predefined example from the given path."""
         try:
             loaded = load_state(path)
@@ -157,7 +157,6 @@ class WireWorldApp:
             self.initial_grid = copy_grid(self.grid)
             self.recreate_window()
             self.generation = 0
-            self.running = False
             print(f"{path} example loaded.")
         except Exception as e:
             print(f"Error loading: {e}")
