@@ -28,6 +28,7 @@ GRID_WIDTH = 49         # cells
 GRID_HEIGHT = 36        # cells
 MARGIN = 1              # space between cells (visual)
 TOP_UI_HEIGHT = 50      # pixels reserved for top bar
+RIGTH_UI_WIDTH = 843     # pixels reserved for right bar (not used)
 FPS = 60
 DEFAULT_TPS = 10        # ticks per second during playback
 

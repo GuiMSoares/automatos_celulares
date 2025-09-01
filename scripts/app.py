@@ -72,19 +72,33 @@ class WireWorldApp:
         bw = 110
         bh = 34
         gap = 8
+
+        aw = 175
         
-        def add(label, callback):
+        def add(label, callback, KEY):
             nonlocal x
-            self.buttons.append(Button(Rect(x, y, bw, bh), label, callback))
-            x += bw + gap
+            nonlocal y
+            if KEY:
+                self.buttons.append(Button(Rect(x, y, bw, bh), label, callback))
+                x += bw + gap
+            
+            else:
+                self.buttons.append(Button(Rect(x, y, aw, bh), label, callback))
+                y += bh + gap
         
-        add('Play/Pause', self.toggle_running)
-        add('Step', self.step_once)
-        add('Reset', self.reset)
-        add('Load', self.prompt_load)
-        add('Save', self.prompt_save)
-        add('Speed -', lambda: self.set_speed(self.tps - 1))
-        add('Speed +', lambda: self.set_speed(self.tps + 1))
+        add('Play/Pause', self.toggle_running, True)
+        add('Step', self.step_once, True)
+        add('Reset', self.reset, True)
+        add('Load', self.prompt_load, True)
+        add('Save', self.prompt_save, True)
+        add('Speed -', lambda: self.set_speed(self.tps - 1), True)
+        add('Speed +', lambda: self.set_speed(self.tps + 1), True)
+        add('examples:', self.gate_and, False)
+        add('NOT', None, False)
+        add('OR', None, False)
+        add('AND', None, False)
+        add('XOR', None, False)
+        add('Flip-Flop', None, False)
         
 
     # ------------- Actions -------------
@@ -133,6 +147,20 @@ class WireWorldApp:
                 print(f"Saved to {path}")
             except Exception as e:
                 print(f"Error saving: {e}")
+
+    def gate_and(self):
+        try:
+            loaded = load_state('..\gates\gate-and.txt')
+            self.resize_to_loaded(loaded)
+            self.grid = loaded
+            self.initial_grid = copy_grid(self.grid)
+            self.recreate_window()
+            self.generation = 0
+            self.running = False
+            print("and example pattern created.")
+        except Exception as e:
+            print(f"Error loading: {e}")
+        
 
     def recreate_window(self):
         """Recreate window and buttons after grid resize."""
