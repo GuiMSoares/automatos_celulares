@@ -22,12 +22,15 @@ CHAR_TO_STATE = {
 
 # --------------- Display Configuration ---------------
 CELL_SIZE = 16          # pixels
-GRID_WIDTH = 60         # cells
+WIDTH_BOX = 1021
+HEIGHT_BOX = 663
+GRID_WIDTH = 49         # cells
 GRID_HEIGHT = 36        # cells
 MARGIN = 1              # space between cells (visual)
 TOP_UI_HEIGHT = 50      # pixels reserved for top bar
 FPS = 60
 DEFAULT_TPS = 10        # ticks per second during playback
+
 
 # --------------- Colors ---------------
 BG_COLOR = (20, 22, 28)

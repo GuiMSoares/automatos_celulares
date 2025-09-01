@@ -75,32 +75,3 @@ def step_wireworld(grid: List[List[int]]) -> List[List[int]]:
                 nextg[y][x] = ELECTRON_HEAD if heads in (1, 2) else CONDUCTOR
     return nextg
 
-
-def create_demo_pattern(grid_width: int, grid_height: int) -> List[List[int]]:
-    """Create a demonstration pattern for WireWorld."""
-    grid = new_grid(grid_width, grid_height, EMPTY)
-    
-    # Create a horizontal wire with an electron
-    y = grid_height // 2
-    for x in range(10, 30):
-        grid[y][x] = CONDUCTOR
-    
-    # Add an electron at the beginning
-    grid[y][12] = ELECTRON_HEAD
-    grid[y][11] = ELECTRON_TAIL
-    
-    # Create a second pattern - small loop
-    loop_y = grid_height // 2 - 8
-    loop_x = 15
-    # Make a small square
-    for i in range(6):
-        grid[loop_y][loop_x + i] = CONDUCTOR     # top
-        grid[loop_y + 5][loop_x + i] = CONDUCTOR # bottom
-        grid[loop_y + i][loop_x] = CONDUCTOR     # left  
-        grid[loop_y + i][loop_x + 5] = CONDUCTOR # right
-    
-    # Add electron in the loop
-    grid[loop_y][loop_x + 1] = ELECTRON_HEAD
-    grid[loop_y][loop_x + 2] = ELECTRON_TAIL
-    
-    return grid

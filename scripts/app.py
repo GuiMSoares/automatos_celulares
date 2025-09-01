@@ -6,12 +6,11 @@ from pygame import Rect
 from typing import List, Tuple
 
 from constants import (
-    GRID_WIDTH, GRID_HEIGHT, CELL_SIZE, MARGIN, TOP_UI_HEIGHT, FPS, DEFAULT_TPS,
+    GRID_WIDTH, WIDTH_BOX, GRID_HEIGHT, HEIGHT_BOX, CELL_SIZE, MARGIN, TOP_UI_HEIGHT, FPS, DEFAULT_TPS,
     EMPTY, CONDUCTOR, ELECTRON_HEAD, ELECTRON_TAIL
 )
 from wireworld import (
-    new_grid, copy_grid, load_state, save_state, step_wireworld, 
-    create_demo_pattern, clamp
+    new_grid, copy_grid, load_state, save_state, step_wireworld, clamp
 )
 from ui import Button, pixel_to_cell, draw_frame
 
@@ -56,15 +55,15 @@ class WireWorldApp:
 
     def _create_window(self):
         """Create the main window based on current grid size."""
-        w = GRID_WIDTH * (CELL_SIZE + MARGIN) + MARGIN
-        h = TOP_UI_HEIGHT + GRID_HEIGHT * (CELL_SIZE + MARGIN) + MARGIN
-        self.screen = pygame.display.set_mode((w, h))
+        #w = GRID_WIDTH * (CELL_SIZE + MARGIN) + MARGIN
+        #h = TOP_UI_HEIGHT + GRID_HEIGHT * (CELL_SIZE + MARGIN) + MARGIN
+        self.screen = pygame.display.set_mode((WIDTH_BOX, HEIGHT_BOX))
 
     def resize_to_loaded(self, loaded: List[List[int]]):
         """Resize grid dimensions to match loaded state."""
-        global GRID_WIDTH, GRID_HEIGHT
-        GRID_HEIGHT = len(loaded)
-        GRID_WIDTH = len(loaded[0]) if GRID_HEIGHT else 0
+        #global GRID_WIDTH, GRID_HEIGHT
+        HEIGHT_BOX = len(loaded)
+        WIDTH_BOX = len(loaded[0]) if GRID_HEIGHT else 0
 
     def create_buttons(self):
         """Create UI buttons."""
@@ -86,7 +85,7 @@ class WireWorldApp:
         add('Save', self.prompt_save)
         add('Speed -', lambda: self.set_speed(self.tps - 1))
         add('Speed +', lambda: self.set_speed(self.tps + 1))
-        add('Demo', self.create_demo_pattern)
+        
 
     # ------------- Actions -------------
     def toggle_running(self):
@@ -107,14 +106,6 @@ class WireWorldApp:
     def set_speed(self, tps):
         """Set simulation speed (ticks per second)."""
         self.tps = clamp(int(tps), 1, 120)
-
-    def create_demo_pattern(self):
-        """Create a demonstration pattern."""
-        self.grid = create_demo_pattern(GRID_WIDTH, GRID_HEIGHT)
-        self.initial_grid = copy_grid(self.grid)
-        self.generation = 0
-        self.running = False
-        print("Demo pattern created! Press Play to see the simulation.")
 
     def prompt_load(self):
         """Prompt user to load a file."""
@@ -189,9 +180,7 @@ class WireWorldApp:
             self.brush = ELECTRON_HEAD
         elif event.key == pygame.K_4:
             self.brush = ELECTRON_TAIL
-        elif event.key == pygame.K_d:
-            self.create_demo_pattern()
-
+        
     # ------------- Main Loop -------------
     def run(self):
         """Run the main application loop."""
