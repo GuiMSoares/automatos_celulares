@@ -55,15 +55,13 @@ class WireWorldApp:
 
     def _create_window(self):
         """Create the main window based on current grid size."""
-        #w = GRID_WIDTH * (CELL_SIZE + MARGIN) + MARGIN
-        #h = TOP_UI_HEIGHT + GRID_HEIGHT * (CELL_SIZE + MARGIN) + MARGIN
         self.screen = pygame.display.set_mode((WIDTH_BOX, HEIGHT_BOX))
 
     def resize_to_loaded(self, loaded: List[List[int]]):
         """Resize grid dimensions to match loaded state."""
-        #global GRID_WIDTH, GRID_HEIGHT
+        global GRID_WIDTH, GRID_HEIGHT, WIDTH_BOX, HEIGHT_BOX
         HEIGHT_BOX = len(loaded)
-        WIDTH_BOX = len(loaded[0]) if GRID_HEIGHT else 0
+        WIDTH_BOX = len(loaded[0]) if HEIGHT_BOX else 0
 
     def create_buttons(self):
         """Create UI buttons."""
@@ -93,12 +91,12 @@ class WireWorldApp:
         add('Save', self.prompt_save, True)
         add('Speed -', lambda: self.set_speed(self.tps - 1), True)
         add('Speed +', lambda: self.set_speed(self.tps + 1), True)
-        #add('examples:', self.examples("..\gates\gate-and.txt"), False)
-        #add('NOT', self.examples("..\gates\gate-not.txt"), False)
-        #add('OR', self.examples("..\gates\gate-or.txt"), False)
-        #add('AND', self.examples("..\gates\gate-and.txt"), False)
-        #add('XOR', self.examples("..\gates\gate-xor.txt"), False)
-        #add('Flip-Flop', self.examples("..\gates\gate-flip-flop.txt"), False)
+        add('examples:', lambda: self.examples("..\gates\gate-and.txt"), False)
+        add('NOT', lambda: self.examples("..\gates\gate-not.txt"), False)
+        add('OR', lambda: self.examples("..\gates\gate-or.txt"), False)
+        add('AND', lambda: self.examples("..\gates\gate-and.txt"), False)
+        add('XOR', lambda: self.examples("..\gates\gate-xor.txt"), False)
+        add('Flip-Flop', lambda: self.examples("..\gates\gate-flip-flop.txt"), False)
         
 
     # ------------- Actions -------------
@@ -126,6 +124,7 @@ class WireWorldApp:
         path = input("Enter path to load (.txt): ").strip()
         if path and os.path.exists(path):
             try:
+                self.running = False
                 loaded = load_state(path)
                 self.resize_to_loaded(loaded)
                 self.grid = loaded
@@ -151,11 +150,11 @@ class WireWorldApp:
     def examples(self, path):
         """Load a predefined example from the given path."""
         try:
+            self.running = False
             loaded = load_state(path)
             self.resize_to_loaded(loaded)
             self.grid = loaded
             self.initial_grid = copy_grid(self.grid)
-            self.recreate_window()
             self.generation = 0
             print(f"{path} example loaded.")
         except Exception as e:

@@ -6,7 +6,7 @@ from typing import Tuple, List
 from constants import (
     BUTTON_BG, BUTTON_BG_HOVER, BUTTON_BG_ACTIVE, BUTTON_TEXT,
     BG_COLOR, GRID_BG, COLORS, TEXT_COLOR,
-    CELL_SIZE, MARGIN, TOP_UI_HEIGHT, EMPTY
+    CELL_SIZE, MARGIN, TOP_UI_HEIGHT,RIGTH_UI_WIDTH, EMPTY
 )
 
 
@@ -88,7 +88,10 @@ def draw_grid(screen, grid: List[List[int]], mouse_grid_pos: Tuple[int | None, i
     # Grid background
     gx0 = 0
     gy0 = TOP_UI_HEIGHT
-    pygame.draw.rect(screen, GRID_BG, Rect(gx0, gy0, screen.get_width(), screen.get_height() - gy0))
+    gwidth = screen.get_width() - RIGTH_UI_WIDTH
+    gheight = screen.get_height() - gy0
+
+    pygame.draw.rect(screen, GRID_BG, Rect(gx0, gy0,gwidth,gheight))
 
     # Draw cells
     for y in range(grid_height):
