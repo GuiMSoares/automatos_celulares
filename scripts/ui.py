@@ -71,15 +71,33 @@ def draw_ui(screen, buttons: List[Button], font, small_font, generation: int, tp
 
     # Information text
     brush_names = {EMPTY: 'EMPTY', 1: 'COND', 2: 'HEAD', 3: 'TAIL'}
-    info = f"Gen: {generation}  TPS: {tps}  Brush: {brush_names.get(brush, 'UNK')}  Running: {running}"
+    rules_and_keys = [
+        f"Atalhos:", "", "1: VAZIO", "2: CONDUTOR", "3: CABEÇA", "4: RABO", "SPACE: PLAY/PAUSE", 
+        "+/-: VELOCIDADE", "S: SALVAR (.txt)", "L: CARREGAR (terminal)", "R: RESETAR", "ESC: SAIR", "N: STEP"
+    ]
+    lines_info = [
+        "Estatísticas:",
+        "",
+        f"Iterações: {generation}",
+        f"Velocidade atual: {tps}",
+        f"Rodando: {running}"
+    ]
     
     # Add mouse position if over grid
     if mouse_grid_pos[0] is not None:
-        info += f"  Mouse: ({mouse_grid_pos[0]}, {mouse_grid_pos[1]})"
+        lines_info.append(f"Mouse: ({mouse_grid_pos[0]}, {mouse_grid_pos[1]})")
     
-    text = small_font.render(info, True, TEXT_COLOR)
-    screen.blit(text, (10, TOP_UI_HEIGHT - 22))
+    y_info_offset = 540
+    y_rules_offset = 270
 
+    for line in lines_info:
+        text_info = small_font.render(line, True, TEXT_COLOR)
+        screen.blit(text_info, (RIGTH_UI_WIDTH, y_info_offset))
+        y_info_offset += text_info.get_height() + 2   # espaçamento entre linhas
+    for line in rules_and_keys:
+        text_rules = small_font.render(line, True, TEXT_COLOR)
+        screen.blit(text_rules, (RIGTH_UI_WIDTH, y_rules_offset))
+        y_rules_offset += text_rules.get_height() + 2
 
 def draw_grid(screen, grid: List[List[int]], mouse_grid_pos: Tuple[int | None, int | None]):
     """Draw the cellular automaton grid."""

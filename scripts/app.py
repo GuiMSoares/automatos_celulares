@@ -91,7 +91,7 @@ class WireWorldApp:
         add('Save', self.prompt_save, True)
         add('Speed -', lambda: self.set_speed(self.tps - 1), True)
         add('Speed +', lambda: self.set_speed(self.tps + 1), True)
-        add('examples:', self.reset, False)
+        add('EXEMPLOS:', lambda: None, False)
         add('NOT', lambda: self.examples("..\gates\gate-not.txt"), False)
         add('OR', lambda: self.examples("..\gates\gate-or.txt"), False)
         add('AND', lambda: self.examples("..\gates\gate-and.txt"), False)

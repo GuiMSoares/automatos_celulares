@@ -30,7 +30,7 @@ MARGIN = 1              # space between cells (visual)
 TOP_UI_HEIGHT = 50      # pixels reserved for top bar
 RIGTH_UI_WIDTH = 840     # pixels reserved for right bar (not used)
 FPS = 60
-DEFAULT_TPS = 10        # ticks per second during playback
+DEFAULT_TPS = 6        # ticks per second during playback
 
 
 # --------------- Colors ---------------
