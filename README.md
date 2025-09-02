@@ -11,19 +11,15 @@ Implementação completa do autômato celular WireWorld com interface gráfica.
 - Desenho e edição com mouse
 - Ajuste de velocidade da simulação
 - Interface gráfica com botões
-- Padrão de demonstração automático
+- Demonstração de portas lógicas
 
 ## 🚀 Como Usar
 
 ### Execução
 ```bash
-python automata.py                            # Mapa vazio
-python automata.py nome_do_arquivo.txt        # Carrega arquivo pré definido
+python main.py                            # Mapa vazio
+python main.py nome_do_arquivo.txt        # Carrega arquivo pré definido do mesmo diretório
 ```
-
-### 🎯 Teste a demonstração
-1. **Pressione 'D'** ou clique **"Demo"** para criar padrão exemplo
-2. **Pressione Espaço** ou clique **"Play/Pause"** para iniciar
 
 ## ⌨️ Controles
 
@@ -31,7 +27,6 @@ python automata.py nome_do_arquivo.txt        # Carrega arquivo pré definido
 - **Espaço** - Play/Pause
 - **N** - Step (uma iteração)
 - **R** - Reset
-- **D** - Criar padrão demo
 - **L** - Carregar arquivo
 - **S** - Salvar arquivo
 - **1/2/3/4** - Pincéis: Vazio/Condutor/Cabeça/Cauda
@@ -40,16 +35,15 @@ python automata.py nome_do_arquivo.txt        # Carrega arquivo pré definido
 
 ### Mouse
 - **Esquerdo** - Pintar com pincel atual
-- **Direito** - Apagar (vazio)
+- **Direito** - Apagar
 - **Meio** - Alternar estado da célula
 
 ### Botões da Interface
-- **Play/Pause** - Controla simulação
+- **Play/Pause** - Pausa ou continua a simulação
 - **Step** - Uma iteração
 - **Reset** - Estado inicial
-- **Load/Save** - Arquivos
+- **Load/Save** - Carregar/salvar arquivo
 - **Speed +/-** - Velocidade
-- **Demo** - Gera um exemplo de demonstração
 
 ## 🔌 Estados das Células
 - **.** (cinza) - **Vazio**
@@ -59,13 +53,13 @@ python automata.py nome_do_arquivo.txt        # Carrega arquivo pré definido
 
 ## 📁 Formato de Arquivo
 ```
-. # H t    <- Caracteres válidos
+. # H t    <- Caracteres válidos (H -> cabeça, t -> cauda, # -> caminho)
 0 1 2 3    <- Ou números
 ```
 
-Exemplo de arquivo válido pode ser encontrado em 'teste.txt', assim como executado com:
-```
-python main.py test.txt
+Exemplos de arquivos de portas lógicas estão no diretório /gates e podem ser rodados com:
+```bash
+python main.py ../gates/gate-and.txt    # Para porta and
 ```
 
 ## 📋 Requisitos
