@@ -59,9 +59,9 @@ class WireWorldApp:
 
     def resize_to_loaded(self, loaded: List[List[int]]):
         """Resize grid dimensions to match loaded state."""
-        global GRID_WIDTH, GRID_HEIGHT, WIDTH_BOX, HEIGHT_BOX
-        HEIGHT_BOX = len(loaded)
-        WIDTH_BOX = len(loaded[0]) if HEIGHT_BOX else 0
+        global GRID_WIDTH, GRID_HEIGHT
+        GRID_HEIGHT = len(loaded)
+        GRID_WIDTH = len(loaded[0]) if GRID_HEIGHT else 0
 
     def create_buttons(self):
         """Create UI buttons."""
@@ -91,12 +91,12 @@ class WireWorldApp:
         add('Save', self.prompt_save, True)
         add('Speed -', lambda: self.set_speed(self.tps - 1), True)
         add('Speed +', lambda: self.set_speed(self.tps + 1), True)
-        add('EXEMPLOS:', lambda: None, False)
-        add('NOT', lambda: self.examples("..\gates\gate-not.txt"), False)
-        add('OR', lambda: self.examples("..\gates\gate-or.txt"), False)
-        add('AND', lambda: self.examples("..\gates\gate-and.txt"), False)
-        add('XOR', lambda: self.examples("..\gates\gate-xor.txt"), False)
-        add('Flip-Flop', lambda: self.examples("..\gates\gate-flip-flop.txt"), False)
+        add('Gates Examples:', lambda: None, False)
+        add('NOT', lambda: self.examples(os.path.join("..", "gates", "gate-not.txt")), False)
+        add('OR', lambda: self.examples(os.path.join("..", "gates", "gate-or.txt")), False)
+        add('AND', lambda: self.examples(os.path.join("..", "gates", "gate-and.txt")), False)
+        add('XOR', lambda: self.examples(os.path.join("..", "gates", "gate-xor.txt")), False)
+        add('Flip-Flop', lambda: self.examples(os.path.join("..", "gates", "gate-flip-flop.txt")), False)
         
 
     # ------------- Actions -------------
