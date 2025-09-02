@@ -5,7 +5,7 @@ from pygame import Rect
 from typing import Tuple, List
 from constants import (
     BUTTON_BG, BUTTON_BG_HOVER, BUTTON_BG_ACTIVE, BUTTON_TEXT,
-    BG_COLOR, GRID_BG, COLORS, TEXT_COLOR,
+    BG_COLOR, GRID_BG, COLORS, TEXT_COLOR, WIDTH_BOX, HEIGHT_BOX,
     CELL_SIZE, MARGIN, TOP_UI_HEIGHT,RIGTH_UI_WIDTH, EMPTY
 )
 
@@ -22,6 +22,7 @@ class Button:
 
     def draw(self, surf, font):
         """Draw the button on the given surface."""
+        
         bg = BUTTON_BG_ACTIVE if self.active else (BUTTON_BG_HOVER if self.hover else BUTTON_BG)
         pygame.draw.rect(surf, bg, self.rect, border_radius=8)
         text = font.render(self.label, True, BUTTON_TEXT)
@@ -85,21 +86,13 @@ def draw_grid(screen, grid: List[List[int]], mouse_grid_pos: Tuple[int | None, i
     grid_height = len(grid)
     grid_width = len(grid[0]) if grid_height else 0
     
-    # Grid background
-    gx0 = 0
-    gy0 = TOP_UI_HEIGHT
-    gwidth = screen.get_width() - RIGTH_UI_WIDTH
-    gheight = screen.get_height() - gy0
-
-    pygame.draw.rect(screen, GRID_BG, Rect(gx0, gy0,gwidth,gheight))
-
     # Draw cells
     for y in range(grid_height):
         for x in range(grid_width):
             state = grid[y][x]
             color = COLORS.get(state, COLORS[EMPTY])
             px = MARGIN + x * (CELL_SIZE + MARGIN)
-            py = gy0 + MARGIN + y * (CELL_SIZE + MARGIN)
+            py = TOP_UI_HEIGHT + MARGIN + y * (CELL_SIZE + MARGIN)
             
             # Highlight cell under mouse cursor
             if mouse_grid_pos == (x, y):
@@ -116,7 +109,7 @@ def draw_frame(screen, grid: List[List[int]], buttons: List[Button], font, small
               generation: int, tps: int, brush: int, running: bool, 
               mouse_grid_pos: Tuple[int | None, int | None]):
     """Draw a complete frame of the application."""
-    screen.fill(BG_COLOR)
+    screen.fill(GRID_BG)
     draw_ui(screen, buttons, font, small_font, generation, tps, brush, running, mouse_grid_pos)
     draw_grid(screen, grid, mouse_grid_pos)
     pygame.display.flip()

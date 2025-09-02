@@ -6,7 +6,7 @@ from pygame import Rect
 from typing import List, Tuple
 
 from constants import (
-    GRID_WIDTH, WIDTH_BOX, GRID_HEIGHT, HEIGHT_BOX, CELL_SIZE, MARGIN, TOP_UI_HEIGHT, FPS, DEFAULT_TPS,
+    GRID_WIDTH, WIDTH_BOX, GRID_HEIGHT, HEIGHT_BOX, CELL_SIZE, RIGTH_UI_WIDTH, MARGIN, TOP_UI_HEIGHT, FPS, DEFAULT_TPS,
     EMPTY, CONDUCTOR, ELECTRON_HEAD, ELECTRON_TAIL
 )
 from wireworld import (
@@ -81,7 +81,7 @@ class WireWorldApp:
                 x += bw + gap
             
             else:
-                self.buttons.append(Button(Rect(x, y, aw, bh), label, callback))
+                self.buttons.append(Button(Rect(RIGTH_UI_WIDTH, y, aw, bh), label, callback))
                 y += bh + gap
         
         add('Play/Pause', self.toggle_running, True)
@@ -91,7 +91,7 @@ class WireWorldApp:
         add('Save', self.prompt_save, True)
         add('Speed -', lambda: self.set_speed(self.tps - 1), True)
         add('Speed +', lambda: self.set_speed(self.tps + 1), True)
-        add('examples:', lambda: self.examples("..\gates\gate-and.txt"), False)
+        add('examples:', self.reset, False)
         add('NOT', lambda: self.examples("..\gates\gate-not.txt"), False)
         add('OR', lambda: self.examples("..\gates\gate-or.txt"), False)
         add('AND', lambda: self.examples("..\gates\gate-and.txt"), False)
